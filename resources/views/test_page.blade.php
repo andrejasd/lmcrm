@@ -21,10 +21,10 @@
     <tbody>
     @foreach($leads as $lead)
       <tr>
-        <td></td>
+        <td> {{ $lead->radio->label }} = {{ $lead->radio_value->value }} </td>
         <td> {{ $lead->date }} </td>
         <td> {{ $lead->name }} </td>
-        <td> phone </td>
+        <td> {{ $lead->phone }}</td>
         <td> {{ $lead->email }} </td>
       </tr>
     @endforeach

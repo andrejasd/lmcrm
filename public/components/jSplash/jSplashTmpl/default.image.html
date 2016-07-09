@@ -1,0 +1,13 @@
+<div class="form-group">
+    <div class="col-xs-12">
+        <label class="control-label _col-sm-2">{{=it.settings.label }}</label>
+        <span class="image-editable">
+                    <img {{ for(var index in it.attributes) { }} {{=index}}="{{=it.attributes[index] }}" {{ } }} src="{{?it.values && it.values!="" }}{{=it.values}}{{?? true}}http://placehold.it/250x250{{??}}{{?}}" >
+                    <div class="image-options">
+                <a href="#" class="edit"><i class="entypo-pencil"></i></a>
+                <a href="#" class="delete"><i class="entypo-cancel"></i></a>
+                </div>
+        </span>
+        <div class="text-danger"></div>
+    </div>
+</div>

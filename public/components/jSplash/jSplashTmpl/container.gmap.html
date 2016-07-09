@@ -1,0 +1,30 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title" >{{?it.settings && it.settings.label}}{{=it.settings.label}}{{?}}</div>
+        <div class="panel-options">
+            <a data-rel="collapse" href="#">
+                <i class="entypo-down-open"></i>
+            </a>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="gmap">
+                    <div class="col-xs-12">
+                        <chain><!--{ {=it.chain} }--></chain></div>
+                    </div>
+                <div class="form-group">
+                    <div class="col-xs-9  col-xs-offset-3">
+                        <input id="map-search" type="text" class="form-control map-search" placeholder="{{=trans("Google Map Address or Coordinates")}}" title="{{=trans("Google Map Address or Coordinates")}}" />
+                        </div>
+                    </div>
+                <div class="col-xs-9 col-xs-offset-3">
+                    <div id="map-canvas" class="gmap map-render">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

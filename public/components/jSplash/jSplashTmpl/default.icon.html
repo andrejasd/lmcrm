@@ -1,0 +1,27 @@
+<div class="form-group">
+    <div class="col-xs-12">
+        <label class="control-label _col-sm-2" >{{=it.settings.label }}</label>
+        
+        <div class="gallery-env col-sm-4 col-xs-6 edit-page-opt">
+            <article class="image-thumb portfolio-item">
+                <a class="image select-icon" href="#">
+                    <span class="img-container">
+                        {{=it.values}}
+                    </span>
+                </a>
+                <div class="image-options">
+                    <a class="edit" href="#"><i class="entypo-pencil"></i></a>
+                    <!--<a href="#" class="delete"><i class="entypo-cancel"></i></a>-->
+                </div>
+            </article>              
+        </div>
+      
+        
+        <input type="text" name="{{=it.name}}"
+        {{ for(var index in it.attributes) { }} {{=index}}="{{=it.attributes[index] }}" {{ } }}
+        {{?it.settings.validate}} data-validate="{{=it.settings.validate}}" {{?}}
+        {{?it.values}}value="{{!it.values}}"{{?}}
+        >
+        <div class="text-danger"></div>
+    </div>
+</div>

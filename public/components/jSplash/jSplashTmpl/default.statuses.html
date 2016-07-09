@@ -1,0 +1,70 @@
+<div class="statuses">
+    <div class="row row-container">
+        <div class="form-group col-xs-12">
+            <div class="row">
+                <div class="col-xs-12"><label class="control-label">{{=trans("statuses")}}</label></div>
+            </div>
+            <div class="row duplicate hidden">
+                <div class="col-xs-5">
+                    <input type="text" name="status" class="form-control pull-left flip select" value="" data-id="0" data-extend="1"/>
+                </div>
+                <div class="col-xs-2">
+                    <div class="togglebutton">
+                        <label>
+                            {{=trans("min")}} <input checked="checked" type="checkbox" class="extend"> {{=trans("max")}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input type="text" value="" class="form-control extend" />
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-warning btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                </div>
+            </div>
+            {{~(it.values) ? ((typeof it.values=='string' || (typeof it.values=='object' && it.values.constructor.toString().indexOf('Array') == -1) ) ? [it.values] : it.values) : [] :itvalObj}}
+            <div class="row duplicate duplicated">
+                <div class="col-xs-5">
+                    <input type="text" name="status" class="form-control pull-left flip select" value="{{=itvalObj["val"]||""}}" data-id="{{=itvalObj["id"]||0}}" data-extend="1"/>
+                </div>
+                <div class="col-xs-2">
+                    <div class="togglebutton">
+                        <label>
+                            {{=trans("min")}} <input type="checkbox" class="extend" {{?itvalObj["vale"][0]==1}}checked="checked"{{?}}> {{=trans("max")}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="input-group">
+                        <input type="text" value="{{=itvalObj["vale"][1]||""}}" class="form-control extend"  />
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" class="btn btn-danger btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                </div>
+            </div>
+            {{~}}
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-primary btn-duplicate-add btn-raised pull-right flip"><i class="entypo-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="form-group _label-floating">
+                <label class="control-label" for="recLead">{{=trans("minimum lead")}}</label>
+                <div class="input-group">
+                    <input type="text" id="recLead" value="{{=it.settings.stat.minLead || 1}}" class="form-control" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-fab btn-fab-mini btn-calc" type="button"><i class="entypo-cw"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6"></div>
+    </div>
+</div>

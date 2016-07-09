@@ -1,0 +1,192 @@
+@import url(http://fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+
+body {
+	font-family: 'Open Sans Hebrew', sans-serif;
+	background-color: #ffffff;
+}
+
+.bg-royalblue{
+	background: #335964;
+}
+
+.panel { /*8*/
+	border: 0px solid #ffffff;
+	box-shadow: none;
+}
+
+.input-group-addon { /*81*/
+    color: #2b8eab;
+	background-color: #ebfaff;
+    border:  1px solid #3ebbdf;
+}
+
+.form-control { /*118*/
+    color: #2b8eab;
+    border: 1px solid #3ebbdf;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control { /*150*/
+	background-color: #ebfaff;
+}
+
+.form-control::-webkit-input-placeholder,
+.form-control::-moz-placeholder,
+.form-control:-moz-placeholder,
+.form-control:-ms-input-placeholder{
+	color:#3ebbdf;
+}
+
+.btn-default { /*3052*/
+    color: #2b8eab;
+    border-color: #3ebbdf;
+}
+
+.btn-default.focus, .btn-default:focus { /*3058*/
+	color: #fefefe;
+	background-color: #3ebbdf;
+	border-color: #2b8eab;
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default.focus:active, .btn-default:active:focus, .btn-default:active:hover, .open > .dropdown-toggle.btn-default.focus, .open > .dropdown-toggle.btn-default:focus, .open > .dropdown-toggle.btn-default:hover {
+	color: #fefefe;
+	background-color: #3ebbdf;
+	border-color: #2b8eab;
+}
+
+.btn-default:hover { /*3063*/
+    color: #ffffff;
+    background-color: #3ebbdf;
+    border-color: #3ebbdf;	
+}
+
+a { /*1100*/
+	color: #3ebbdf;
+}
+
+.sidebar .collapse{
+	display: block;
+}
+
+.navbar-brand{ /*167*/
+	width: auto;
+	height: auto;
+	border-left: 1px solid #e7e7e7;
+	border-right:1px solid #e7e7e7;
+}
+.navbar-brand > img {
+	display: inline-block;
+}
+
+.table-bordered { /*2306*/
+	border: 1px solid #688e99;
+    border-radius: 4px;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {	
+    border: 0px solid #c7ced0;
+    border-bottom: 1px solid #c7ced0;
+    border-right: 1px solid #c7ced0;
+}
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th, .table-bordered th{
+	color: #ffffff;
+	background-color: #63a4b8
+}
+
+.modal-content {
+	border: 1px solid #688e99;
+	-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.25);
+	box-shadow: 0 8px 19px rgba(0,0,0,.25);
+}
+
+.modal-backdrop {
+	background: transparent 0;
+}
+
+.panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a { /*5455*/
+	color: #3ebbdf;
+}
+
+.panel-default > .panel-heading { /*5665*/
+	background-color: transparent;
+	border-bottom: 1px solid #d9d9d9;	
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+	background-color: #f8f8f8;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+
+}
+
+.panel .collapse.in {
+    display: block;
+    position: relative;
+    top: -4px;
+}
+
+footer,.footer,#footer{
+	/*position: absolute;*/
+	padding: 35px 20px 10px;
+	bottom: 0;
+	width: 100%;
+}
+
+.icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto;
+	background: transparent url('/public/icons/none.png') no-repeat 0px 0px;
+}
+.sidebar .nav > li > a:focus .icon,.sidebar .nav > li > a:hover .icon,
+.icon:hover, .icon.active{
+	background-position: 0px -40px;
+}
+
+.icon.icon-add-user{
+	background-image: url('/public/icons/AddUser.png');
+}
+.icon.icon-sell{
+	background-image: url('/public/icons/Sell.png');
+}
+.icon.icon-buy{
+	background-image: url('/public/icons/Buy.png');
+}
+.icon.icon-document{
+	background-image: url('/public/icons/Document.png');
+}
+
+.navbar-top-links { /*TEMP!!!*/
+	margin-top: 25px;
+}
+
+.selectboxit-btn {
+	background: #ffffff none;
+	border: 1px solid #3ebbdf;
+}
+
+.selectboxit-text{
+	margin: 0 5px;
+}
+
+.selectboxit-arrow-container {
+	background: #3ebbdf none;
+	color: #ffffff;
+}
+
+.selectboxit .selectboxit-arrow-container .selectboxit-arrow {
+	border: 0;
+	position: static;
+}
+.selectboxit .selectboxit-arrow-container .selectboxit-arrow:before {
+	font-family: FontAwesome;
+	content: "\f078";
+	position: absolute;
+	top: 25%;
+	left: 25%;
+}
+.selectboxit.selectboxit-open .selectboxit-arrow-container .selectboxit-arrow:before {
+	font-family: FontAwesome;
+	content: "\f077";
+}

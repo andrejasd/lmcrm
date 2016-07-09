@@ -1,0 +1,11 @@
+<div class="form-group">
+    <div class="col-xs-12">
+        <label class="control-label _col-sm-2" >{{=it.settings.label }}</label>
+        <input type="text" name="{{=it.name}}"
+        {{ for(var index in it.attributes) { }} {{=index}}="{{=it.attributes[index] }}" {{ } }}
+        {{?it.settings.validate}} data-validate="{{=it.settings.validate}}" {{?}}
+        {{?it.values}}value="{{=it.values}}"{{?}}
+        >
+        <div class="text-danger"></div>
+    </div>
+</div>

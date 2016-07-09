@@ -1,0 +1,192 @@
+<div class="">
+    {{ if(it.renderType) { }}
+    <div class="row">
+        <div class="col-xs-12">
+            <label class="control-label">{{=trans("select field type")}}</label>
+                <select name="ftype" id="ftype" class="pull-left form-control">
+                    <option value="" selected></option>
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["email"]}}<option value="email">{{=trans("E-mail")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["textarea"]}}<option value="textarea">{{=trans("Text area")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["text"] || it.tmpl.fields["input"]}}<option value="input">{{=trans("Text input")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["checkbox"]}}<option value="checkbox">{{=trans("Checkbox")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["radio"]}}<option value="radio">{{=trans("Radio")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["select"]}}<option value="select">{{=trans("Dropdown")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["calendar"]}}<option value="calendar">{{=trans("Calendar")}}</option>{{?}}
+                    {{?it.tmpl.fields["all"] || it.tmpl.fields["submit"]}}<!--<option value="submit">Submit button</option>-->{{?}}
+                </select>
+        </div>
+    </div>
+    {{ } else { }}
+    {{ for(var prop in it.settings) {
+        switch (prop) {
+            case "id": }}
+                <input type="hidden" name="id" value="{{=it.values[prop]||it.settings[prop] || ""}}" />
+                {{ break;
+            case "icon": }}
+                <div class="row">
+                    <div class="col-xs-5">
+                        <div class="input-group">
+                            <input type="text" value="{{=it.values[prop]||it.settings[prop] || ""}}" name="{{=prop}}" class="form-control" />
+                                <span class="input-group-btn">
+                                    <a data-fancybox-type="iframe" href="/mediabrowser/{{=prop}}" class="btn btn-xs mediabrowser-js" type="button"><span class="glyphicon glyphicon-folder-open"></span></a>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            {{ break;
+            case "label": }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="control-label">{{=trans(prop)}}:</label><input type="text" name="{{=prop}}" value="{{=it.values[prop]||it.settings[prop] || ""}}" class="form-control" {{?it.settings[prop]["required"]}}data-validate="required"{{?}}/>
+                    </div>
+                </div>
+                {{ break;
+            case "placeholder": }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="control-label">{{=trans(prop)}}:</label><input type="text" name="{{=prop}}" value="{{=it.values[prop]||it.settings[prop]["value"] || ""}}" class="form-control"  {{?it.settings[prop]["required"]}}data-validate="required"{{?}}/>
+                    </div>
+                </div>
+                {{ break;
+            case "required": }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="{{=prop}}" value="1" {{?it.values[prop]||it.settings[prop]["value"]}}checked=checked{{?}} {{?it.settings[prop].edit==false}}disabled{{?}}/>
+                                {{=trans(prop)}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {{ break;
+            case "validate": }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="control-label">{{=trans(prop)}}:</label>
+                        <div class="row duplicate hidden">
+                            <div class="col-xs-7">
+                                <input type="hidden" value="" class="data" data-name="{{=prop}}" data-type="record"/>
+                                <select class="form-control select pull-left">
+                                    <option value="" selected></option>
+                                    {{~["email","url","number","date","digits","dateISO","creditcard"] :value:index}}
+                                    <option value="{{=value}}"}>{{=trans(value)}}</option>
+                                    {{~}}
+                                    {{~["min","max","minlength","maxlength","equalTo"] :value:index}}
+                                    <option value="{{=value}}" data-extend="1">{{=trans(value)}}</option>
+                                    {{~}}
+                                </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" value="" class="form-control extend" disabled/>
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-warning btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                            </div>
+                        </div>
+                        {{~(it.values[prop] && it.values[prop].length) ? it.values[prop] : it.settings[prop] || [{}] :itvalObj}}
+                        {{ itval = itvalObj["val"].split(/\[|\]/g); }}
+                        <div class="row duplicate duplicated">
+                            <div class="col-xs-7">
+                            <input type="hidden" value="{{=itvalObj["id"]}}" class="data" name="{{=prop}}" data-type="record"/>
+                            <select class="form-control select pull-left">
+                                <option value=""></option>
+                                {{~["email","url","number","date","digits","dateISO","creditcard"] :value:index}}
+                                    <option value="{{=value}}" {{?value==itval[0]}}SELECTED{{?}}>{{=trans(value)}}</option>
+                                {{~}}
+                                {{~["min","max","minlength","maxlength","equalTo"] :value:index}}
+                                    <option value="{{=value}}" data-extend="1" {{?value==itval[0]}}SELECTED{{?}}>{{=trans(value)}}</option>
+                                {{~}}
+                            </select>
+                            </div>
+                            <div class="col-xs-3">
+                                <input type="text" value="{{=itval[1]||""}}" class="form-control extend" {{?!itval[1]}}disabled{{?}}/>
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="button" class="btn btn-warning btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                            </div>
+                        </div>
+                        {{~}}
+                        <div class="col-xs-12">
+                            <button type="button" class="btn btn-primary btn-duplicate-add btn-raised pull-right flip"><i class="entypo-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                {{ break;
+            case "option": }}
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-3"><label class="control-label text-center">{{=trans("add to agent form")}}</label></div>
+                        <div class="col-xs-6"><label class="control-label">{{=trans(prop)}}:</label></div>
+                    </div>
+                    <div class="row duplicate hidden">
+                        <div class="col-xs-4">
+                            <div class="togglebutton">
+                                <label>
+                                    {{=trans("no")}}
+                                    <input type="checkbox" class="default extend" value="1" checked>
+                                    {{=trans("yes")}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="hidden" value="" class="data" data-name="{{=prop}}" data-type="record"/>
+                            <input type="text" class="form-control pull-left flip select" value="" data-extend="1"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-warning btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                        </div>
+                    </div>
+                    {{~(it.values[prop]) ? ((typeof it.values[prop]=='string' || (typeof it.values[prop]=='object' && it.values[prop].constructor.toString().indexOf('Array') == -1) ) ? [it.values[prop]] : it.values[prop]) : it.settings[prop] || [{}] :itvalObj}}
+                    <div class="row duplicate duplicated">
+                        <div class="col-xs-4">
+                            <div class="togglebutton">
+                                <label>
+                                    {{=trans("no")}}
+                                    <input type="checkbox" class="default extend" value="1" {{?itvalObj["vale"][0]}}checked{{?}}>
+                                    {{=trans("yes")}}
+                                </label>
+                            </div>
+                        </div>
+                        {{?itvalObj["parent"] || !itvalObj["id"]}}
+                        <div class="col-xs-6">
+                            <input type="hidden" value="{{=itvalObj["val"]}}" class="data" name="{{=prop}}" data-type="record" data-id="{{=itvalObj["id"]||0}}" />
+                            <input type="text" class="form-control pull-left flip select" value="{{=itvalObj["val"]||""}}" data-extend="1"/>
+                        </div>
+                        {{??false}} {{??}}
+                        <div class="col-xs-5">
+                            <input type="hidden" value="{{=itvalObj["val"]}}" class="data" name="{{=prop}}" data-type="record" data-id="{{=itvalObj["id"]||0}}" />
+                            <input type="text" class="form-control pull-left flip select" value="{{=itvalObj["val"]||""}}" data-extend="1"/>
+                        </div>
+                        <div class="col-xs-1">
+                            <a class="btn-split"><i class="entypo-flow-branch"></i></a>
+                        </div>
+                        {{?}}
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-danger btn-duplicate-remove pull-right flip"><i class="entypo-cancel"></i></button>
+                        </div>
+                    </div>
+                    {{~}}
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-primary btn-duplicate-add btn-raised pull-right flip"><i class="entypo-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            {{ break;
+            case "minHeight": }}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <label class="control-label">{{=trans(prop)}}, px:</label>
+                        <input type="text" name="{{=prop}}" value="{{=it.values[prop]||it.settings[prop]["value"]}}" class="form-control" data-validate="number"/>
+                    </div>
+                </div>
+                {{ break;
+            case "type":
+                break;
+            default: }}
+                <div class="row">{{=prop}}</div>
+        {{ };
+    } }}
+    {{ } }}
+</div>

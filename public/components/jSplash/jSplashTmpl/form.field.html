@@ -1,0 +1,74 @@
+<div class="col-xs-10" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-xs-2">
+            {{?it.icon}}<label class="control-label text-center"><img src="/{{=it.icon}}" class="thumbnail" style="max-width: 95%"/></label>{{?}}
+        </div>
+        <div class="form-group col-xs-9">
+            {{ switch(it['_type'])
+            {
+            case 'email': }}
+                    <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                    <input type="text" class="form-control" placeholder="{{=it.placeholder||''}}"/>
+            {{ break;
+            case 'textarea': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                <textarea class="form-control" placeholder="{{=it.placeholder||''}}" {{?it.minHeight}}style="min-height:{{=parseInt(it.minHeight)}}px"{{?}}></textarea>
+            {{ break;
+            case 'input': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                <input type="text" class="form-control" placeholder="{{=it.placeholder||''}}" />
+            {{ break;
+            case 'checkbox': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                {{~(typeof it.option=='string' || (typeof it.option=='object' && it.option.constructor.toString().indexOf('Array') == -1) ) ? [it.option] : it.option || [] :value}}<div class="checkbox"> <label> <input type="checkbox" {{?value.vale}}checked="checked"{{?}}> {{=value.val}}</label> </div>{{~}}
+            {{ break;
+            case 'radio': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                {{~(typeof it.option=='string' || (typeof it.option=='object' && it.option.constructor.toString().indexOf('Array') == -1) ) ? [it.option] : it.option || [] :value}}<div class="radio"> <label> <input type="radio" name="optionsRadios{{=it.id}}" {{?value.vale}}checked="checked"{{?}}> {{=value.val}}</label> </div>{{~}}
+            {{ break;
+            case 'select': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                <select class="form-control">
+                    {{~(typeof it.option=='string' || (typeof it.option=='object' && it.option.constructor.toString().indexOf('Array') == -1) ) ? [it.option] : it.option || [] :value}}<option>{{=value.val}}</option>{{~}}
+                </select>
+            {{ break;
+            case 'calendar': }}
+                <label class="control-label">{{?it.required}}*{{?}}{{=it.label}}</label>
+                <div class="input-group">
+                    <input class="form-control datepicker" data-format="dd-MM-yyyy" type="text">
+                    <div class="input-group-addon"> <a href="#"><i class="entypo-calendar"></i></a> </div>
+                </div>
+                <script type="text/javascript">
+                    if ($.isFunction($.fn.datepicker)) {
+                        $(".datepicker").each(function (i, el) {
+                            var $this = $(el),
+                                    opts = {
+                                        format: attrDefault($this, 'format', 'mm/dd/yyyy'),
+                                        startDate: attrDefault($this, 'startDate', ''),
+                                        endDate: attrDefault($this, 'endDate', ''),
+                                        daysOfWeekDisabled: attrDefault($this, 'disabledDays', ''),
+                                        startView: attrDefault($this, 'startView', 0),
+                                    },
+                                    $n = $this.next();
+                            $this.datepicker(opts);
+                            if ($n.is('.input-group-addon') && $n.has('a')) {
+                                $n.on('click', function (ev) {
+                                    ev.preventDefault();
+                                    $this.datepicker('show');
+                                });
+                            }
+                        });
+                    }
+                </script>
+            {{ break;
+            case 'submit': }}
+                <input type="button" class="btn btn-primary btn-raised" value="{{=it.label}}"/>
+                {{ break;
+            default: }}
+                <input type="text" class="form-control" disabled />
+            {{
+            }
+            }}
+        </div>
+    </div>
+</div>

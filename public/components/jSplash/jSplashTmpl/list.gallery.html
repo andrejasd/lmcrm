@@ -1,0 +1,17 @@
+<div class="form-group">
+    <div class="col-xs-12">
+        <button type="button" class="btn btn-success btn-lg btn-icon icon-left in-modal splash-create"><i class="entypo-plus"></i>{{=trans(it.settings.button) }}</button>
+        </div>
+    </div>
+<div class="list-group sortable">
+    {{~it.tmpl.data :value:index }}
+    <div class="list-group-item gallery-item {{?it.values[index]._status=='DELETE' }}hidden{{?}}">
+        <span class="gallery-image-reserve">{{=value}}</span>
+        <span class="pull-right">
+                    {{?it.tmpl.controls.indexOf("move")!=-1}}<span class="glyphicon glyphicon-move" aria-hidden="true"></span>{{?}}
+                    {{?it.tmpl.controls.indexOf("edit")!=-1}}<span class="glyphicon glyphicon-pencil in-modal splash-edit" aria-hidden="true"></span>{{?}}
+                    {{?it.tmpl.controls.indexOf("delete")!=-1}}<span class="glyphicon glyphicon-trash splash-delete" aria-hidden="true"></span>{{?}}
+        </span>
+    </div>
+    {{~}}
+</div>

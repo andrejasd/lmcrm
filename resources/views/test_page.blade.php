@@ -16,6 +16,7 @@
       <th>name</th>
       <th>phone</th>
       <th>email</th>
+      <th>tmp</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td> {{ $lead->name }} </td>
         <td> {{ $lead->phone }}</td>
         <td> {{ $lead->email }} </td>
+        <td> {{ $lead->radio->id }} </td>
       </tr>
     @endforeach
     </tbody>

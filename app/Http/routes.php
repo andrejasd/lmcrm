@@ -16,3 +16,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => [ 'we
 //Route::get('test', 'TestController@index');
 
 Route::get('test', ['as' => 'test', 'uses' => 'TestController@index']);
+
+Route::get('detail', ['as' => 'detail', 'uses' => 'TestController@detail']); //for AJAX

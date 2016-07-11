@@ -3,29 +3,24 @@
 @section('content')
 
   <script>
-    $(document).ready(function(){
-
-    });
-    function detail(id) {
-      var data = {'id' : id};
-      console.log(data);
-
-      $.get('detail', data, function (data) {
-        data = JSON.parse(data);
-        console.log(data);
-
-        $("#date").text(data['date']);
-        $("#name").text(data['name']);
-        $("#phone").text(data['phone']);
-        $("#email").text(data['email']);
-        $("#radio_label").text(data['radio_label']);
-        $("#radio_value").text(data['radio_value']);
-        $("#checkbox_label").text(data['checkbox_label']);
-        $("#checkbox_value").text(data['checkbox_value']);
-
-        $("#ModalBox").modal('show');
+    function detail() {
+      $.ajax({
+        type: "GET",
+        url: "detail",
+        success: function(data){
+          data = JSON.parse(data);
+          console.log(data);
+          $("#date").text(data['date']);
+          $("#name").text(data['name']);
+          $("#phone").text(data['phone']);
+          $("#email").text(data['email']);
+          $("#radio_label").text(data['radio_label']);
+          $("#radio_value").text(data['radio_value']);
+          $("#checkbox_label").text(data['checkbox_label']);
+          $("#checkbox_value").text(data['checkbox_value']);
+          $("#ModalBox").modal('show');
+        }
       });
-
       return false;
     }
   </script>
@@ -87,15 +82,13 @@
     </tr>
     </thead>
     <tbody>
-    @foreach($leads as $lead)
-      <tr onclick="return detail( {{ $lead->id }} )">
+      <tr onclick="return detail()">
         <td></td>
-        <td> {{ $lead->date }} </td>
-        <td> {{ $lead->name }} </td>
-        <td> {{ $lead->phone }}</td>
-        <td> {{ $lead->email }} </td>
+        <td> {{ $leads['date'] }} </td>
+        <td> {{ $leads['name'] }} </td>
+        <td> {{ $leads['phone'] }}</td>
+        <td> {{ $leads['email'] }} </td>
       </tr>
-    @endforeach
     </tbody>
   </table>
 

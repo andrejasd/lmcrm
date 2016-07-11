@@ -9,24 +9,41 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use App\Models\Lead;
 use App\Models\SphereAttr;
+use Sentinel;
 
 class TestController extends Controller
 {
     //
     public function index(){
-        $leads = Lead::
-            join('open_leads', 'leads.id', '=', 'open_leads.lead_id')
-            ->join('customers', 'leads.customer_id', '=', 'customers.id')
-            ->select('leads.*', 'customers.phone')
-            ->get();
 
-        return view('test_page', ['leads' => $leads]);
+        $user = Sentinel::getUser();
+        if (!is_null($user)){
+            $id = $user->id;
+            $leads = Lead::
+                where('leads.agent_id', '=', $id)
+                ->join('open_leads', 'leads.id', '=', 'open_leads.lead_id')
+                ->join('customers', 'leads.customer_id', '=', 'customers.id')
+                ->select('leads.*', 'customers.phone')
+                ->first();
+            return view('test_page', ['leads' => $leads]);
+        }
+        else{
+            return redirect()->route('login');
+        }
     }
 
     public function detail(){
 
-        if ( $_GET ) {
-            $id = $_GET['id'];
+        $user = Sentinel::getUser();
+
+        if ( !is_null($user)) {
+            
+            $id = Lead::
+                where('leads.agent_id', '=', $user->id)
+                ->join('open_leads', 'leads.id', '=', 'open_leads.lead_id')
+                ->select('leads.id')
+                ->first()
+                ->id;
 
             $leads = Lead::
                 where ('leads.id', '=', $id)
